@@ -1,0 +1,19 @@
+{
+  "_comment": [
+    "Poppy Playtime 第二章 打地鼠跳过工具 / 配置文件  (Kernix - https://github.com/Linuxoid-cn)",
+    "GamePath            : 游戏文件夹. 例如 D:\\SteamLibrary\\steamapps\\common\\Poppy Playtime; 留空则自动检测或询问",
+    "SavePath            : 第二章存档完整路径; 留空则按默认 %LOCALAPPDATA%\\Playtime_Prototype4\\Saved\\SaveGames 推断",
+    "BackupDir           : 备份根目录; 留空则用 exe 同级的 PoppyCh2Skip_Backups",
+    "TargetCheckpoint    : 跳过打地鼠后写入的检查点值, 默认 18 (Whack-A-Wuggy End)",
+    "OpenGitHubAfterDone : 操作成功后是否自动打开作者 GitHub, true/false",
+    "KillGameWithoutAsking: 游戏运行时是否不询问直接强制关闭, true/false (默认 false)",
+    "GitHubUrl           : 要打开的地址, 一般不用改"
+  ],
+  "GamePath": "",
+  "SavePath": "",
+  "BackupDir": "",
+  "TargetCheckpoint": 18,
+  "OpenGitHubAfterDone": true,
+  "KillGameWithoutAsking": false,
+  "GitHubUrl": "https://github.com/Linuxoid-cn"
+}

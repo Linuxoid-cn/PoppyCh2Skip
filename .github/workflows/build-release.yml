@@ -1,0 +1,65 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Windows exe and package
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile with csc (.NET Framework, preinstalled)
+        shell: cmd
+        run: |
+          set "CSC=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+          if not exist "%CSC%" set "CSC=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe"
+          if not exist dist mkdir dist
+          "%CSC%" /nologo /target:exe /platform:anycpu /optimize+ /codepage:65001 /out:dist\PoppyCh2Skip.exe src\PoppyCh2Skip.cs
+
+      - name: Show build info
+        shell: pwsh
+        run: |
+          Get-Item dist\PoppyCh2Skip.exe | Select-Object Name, Length
+          (Get-Item dist\PoppyCh2Skip.exe).VersionInfo | Format-List FileVersion, CompanyName, LegalCopyright
+
+      - name: Package portable zip
+        shell: pwsh
+        run: |
+          $ref = "${{ github.ref_name }}"
+          $ver = if ($ref -match '^v(.+)$') { $Matches[1] } elseif ("${{ github.ref_type }}" -eq 'tag') { $ref.TrimStart('v') } else { "dev" }
+          $stage = "dist\PoppyCh2Skip"
+          New-Item -ItemType Directory -Force -Path $stage | Out-Null
+          Copy-Item dist\PoppyCh2Skip.exe   $stage
+          Copy-Item PoppyCh2Skip.json       $stage
+          Copy-Item README.md               $stage
+          Copy-Item README.zh-CN.md         $stage
+          Copy-Item 快速使用.txt             $stage
+          $zip = "dist\PoppyCh2Skip-v$ver.zip"
+          Compress-Archive -Path "$stage\*" -DestinationPath $zip -Force
+          Get-Item $zip | Select-Object Name, Length
+          "ZIP_NAME=PoppyCh2Skip-v$ver" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ZIP_NAME }}
+          path: dist\PoppyCh2Skip-v*.zip
+          if-no-files-found: error
+
+      - name: Publish to Releases (tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/PoppyCh2Skip-v*.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true

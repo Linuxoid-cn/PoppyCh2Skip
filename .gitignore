@@ -1,0 +1,6 @@
+dist/
+PoppyCh2Skip_Backups/
+*.zip
+*.user
+*.suo
+.vs/

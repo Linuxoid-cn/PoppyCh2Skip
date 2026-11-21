@@ -1,0 +1,42 @@
+﻿==========================================
+ PoppyCh2Skip v1.3.0  —  快速使用
+ 作者: Kernix   https://github.com/Linuxoid-cn
+==========================================
+
+【怎么用】
+ 1. 双击 PoppyCh2Skip.exe（CMD 窗口弹出）
+ 2. 选 [1] 跳过 "打地鼠" 这一关
+ 3. 游戏开着会先问你"是否强制关闭"，选 y 即可
+ 4. 成功后按任意键退出（退出时会打开作者 GitHub）
+ 5. 启动游戏 -> 第 2 章 -> 继续游戏 (Continue)
+
+【v1.3.0 重点】
+ * 电脑上没装游戏时, 会明确列出检查过哪些位置、可能原因、怎么给路径
+ * 会自动扫描 Steam 库 (steamapps\common\Poppy Playtime)
+ * 强制关闭能真正关掉游戏 (识别 *-Win64-Shipping, taskkill 兜底, 可提权重试)
+ * 任何情况下退出都会显示作者并打开 GitHub
+ * 检查点双向: 不管在打地鼠之前还是之后, 都会设回 18
+
+【菜单】
+ [1] 跳过打地鼠（强制备份 + 设为 18）
+ [2] 只备份原存档（不改档）
+ [3] 恢复存档（从备份还原）
+ [4] 退出
+
+【备份在哪里】
+ 默认: 本程序旁边的 PoppyCh2Skip_Backups\时间戳\*.sav
+ 手动恢复: 把备份里的 .sav 覆盖回
+   C:\Users\<你>\AppData\Local\Playtime_Prototype4\Saved\SaveGames\
+
+【配置文件 PoppyCh2Skip.json】
+ GamePath              游戏文件夹（留空=自动扫描 Steam 库/询问）
+ SavePath              存档完整路径（留空=按 %LOCALAPPDATA% 推断）
+ BackupDir             备份根目录（留空=程序旁边）
+ TargetCheckpoint      目标检查点，默认 18
+ OpenGitHubAfterDone   退出时是否打开作者 GitHub
+ KillGameWithoutAsking 游戏运行时是否直接强杀（不询问）
+
+【注意事项】
+ - 改档前必须完全退出游戏
+ - 首次运行若提示"未知发布者": 更多信息 -> 仍要运行
+ - 更完整的说明见 README.zh-CN.md
