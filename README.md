@@ -45,6 +45,10 @@ and shows the backup path so you can recover manually.
 - **JSON config** — `PoppyCh2Skip.json` next to the exe, every path/behaviour configurable
 - **GitHub promotion** — every exit (success, cancel, error, quit) opens the author's GitHub
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for the version history (v1.0.0 -> v1.3.0).
+
 ## Download
 
 Grab the latest portable zip from **[Releases](https://github.com/Linuxoid-cn/PoppyCh2Skip/releases/latest)**:

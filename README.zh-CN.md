@@ -44,6 +44,10 @@
 - **JSON 配置** —— exe 同目录 `PoppyCh2Skip.json`，路径/行为都能改
 - **推广 GitHub** —— 任何情况下退出（成功/取消/出错/选退出）都会打开作者主页
 
+## 更新日志
+
+版本历史见 [CHANGELOG.md](CHANGELOG.md)（v1.0.0 -> v1.3.0）。
+
 ## 下载
 
 到 **[Releases](https://github.com/Linuxoid-cn/PoppyCh2Skip/releases/latest)** 下载便携包：
